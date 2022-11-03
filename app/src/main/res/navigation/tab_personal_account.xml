@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_personal_account"
+    app:startDestination="@id/personalAccountFragment">
+    <fragment
+        android:id="@+id/personalAccountFragment"
+        android:name="com.example.localprofiles.presentation.fragments.PersonalAccountFragment"
+        android:label="fragment_personal_account"
+        tools:layout="@layout/fragment_personal_account" />
+</navigation>
