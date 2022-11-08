@@ -2,6 +2,7 @@ package com.example.localprofiles.data
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.example.localprofiles.domain.ProfileItem
 import com.example.localprofiles.domain.ProfileListRepository
 
@@ -10,24 +11,28 @@ class ProfileListRepositoryImpl(
 ): ProfileListRepository {
 
     private val profileDao = AppDataBase.getInstance(application).profileDao()
+    private val mapper = ProfileListMapper()
 
     override suspend fun addProfileItem(profileItem: ProfileItem) {
-        TODO("Not yet implemented")
+        profileDao.addProfileItem(mapper.mapEntityToDbModel(profileItem))
     }
 
     override suspend fun deleteProfileItem(profileItem: ProfileItem) {
-        TODO("Not yet implemented")
+        profileDao.deleteProfile(profileItem.id)
     }
 
     override suspend fun editProfileItem(profileItem: ProfileItem) {
-        TODO("Not yet implemented")
+       profileDao.addProfileItem(mapper.mapEntityToDbModel(profileItem))
     }
 
     override suspend fun getProfileItem(profileItemID: Int): ProfileItem {
-        TODO("Not yet implemented")
+        val dbModel = profileDao.getProfileItem(profileItemID)
+        return mapper.mapDbModelToEntity(dbModel)
     }
 
-    override fun getProfileList(): LiveData<List<ProfileItem>> {
-        TODO("Not yet implemented")
+    override fun getProfileList(): LiveData<List<ProfileItem>> = Transformations.map(
+        profileDao.getProfileList()
+    ) {
+        mapper.mapListDbModelToListEntity(it)
     }
 }

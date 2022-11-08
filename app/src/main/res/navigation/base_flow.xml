@@ -4,9 +4,7 @@
     android:id="@+id/base_flow"
     app:startDestination="@navigation/tab_main">
 
-    <include app:graph="@navigation/tab_main"/>
+   <!-- <include app:graph="@navigation/tab_main"/>
     <include app:graph="@navigation/tab_add_person"/>
-    <include app:graph="@navigation/tab_personal_account"/>
-
-
+    <include app:graph="@navigation/tab_personal_account"/>-->
 </navigation>

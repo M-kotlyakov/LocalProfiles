@@ -1,4 +1,4 @@
-package com.example.localprofiles.presentation
+package com.example.localprofiles.presentation.activities
 
 import android.os.Bundle
 import android.util.Log

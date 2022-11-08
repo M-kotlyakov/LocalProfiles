@@ -14,12 +14,12 @@
         android:theme="@style/Theme.LocalProfiles"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.LoginActivity"
+            android:name=".presentation.activities.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.LocalProfiles.NoActionBar" />
         <activity
-            android:name=".presentation.SplashActivity"
+            android:name=".presentation.activities.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.activities.MainActivity"
             android:exported="true">
 
             <!--

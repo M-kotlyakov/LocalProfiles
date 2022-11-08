@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.localprofiles.presentation.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addProfileFragment"
+            app:destination="@id/addProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addProfileFragment"
         android:name="com.example.localprofiles.presentation.fragments.AddProfileFragment"

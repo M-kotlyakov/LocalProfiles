@@ -29,6 +29,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs = ['-Xjvm-default=compatibility']
     }
     buildFeatures {
         viewBinding true
@@ -53,6 +54,7 @@ dependencies {
     implementation "androidx.room:room-ktx:2.4.3"
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.fragment:fragment:1.5.4'
     kapt "androidx.room:room-compiler:2.4.3"
 
     implementation 'androidx.core:core-ktx:1.9.0'

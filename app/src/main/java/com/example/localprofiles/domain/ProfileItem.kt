@@ -4,6 +4,7 @@ data class ProfileItem(
     val id: Int = UNDEFINED_ID,
     val name: String,
     val surname: String,
+    val email: String,
     val dateOfBirth: String,
     val numberPhone: String,
     val description: String,

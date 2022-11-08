@@ -1,11 +1,8 @@
-package com.example.localprofiles.presentation
+package com.example.localprofiles.presentation.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.localprofiles.R
-import com.example.localprofiles.presentation.fragments.AuthFragment
 
 class SplashActivity: AppCompatActivity() {
 

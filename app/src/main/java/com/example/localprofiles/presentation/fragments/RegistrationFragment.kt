@@ -6,12 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
-import com.example.localprofiles.R
-import com.example.localprofiles.databinding.FragmentHomeBinding
 import com.example.localprofiles.databinding.FragmentRegistrationBinding
-import com.example.localprofiles.presentation.MainActivity
+import com.example.localprofiles.presentation.activities.MainActivity
 
 
 class RegistrationFragment : Fragment() {
@@ -31,7 +27,7 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.authButton.setOnClickListener {
+        binding.buttonLogin.setOnClickListener {
             requireActivity().startActivity(Intent(requireActivity(), MainActivity::class.java))
             requireActivity().finish()
         }
