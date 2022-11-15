@@ -25,6 +25,10 @@ class ProfileListRepositoryImpl(
        profileDao.addProfileItem(mapper.mapEntityToDbModel(profileItem))
     }
 
+    override suspend fun getUsernameByUsername(username: String, password: String): ProfileItemDbModel {
+        return profileDao.getProfileByUsername(username, password)
+    }
+
     override suspend fun getProfileItem(profileItemID: Int): ProfileItem {
         val dbModel = profileDao.getProfileItem(profileItemID)
         return mapper.mapDbModelToEntity(dbModel)

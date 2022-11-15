@@ -11,17 +11,29 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_addProfileFragment"
-            app:destination="@id/addProfileFragment" />
+            android:id="@+id/action_homeFragment_to_personalAccountFragment"
+            app:destination="@id/personalAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/addProfileFragment"
         android:name="com.example.localprofiles.presentation.fragments.AddProfileFragment"
         android:label="fragment_add_profile"
-        tools:layout="@layout/fragment_add_profile" />
+        tools:layout="@layout/fragment_add_profile" >
+        <action
+            android:id="@+id/action_addProfileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/personalAccountFragment"
         android:name="com.example.localprofiles.presentation.fragments.PersonalAccountFragment"
         android:label="fragment_personal_account"
-        tools:layout="@layout/fragment_personal_account" />
+        tools:layout="@layout/fragment_personal_account" >
+        <action
+            android:id="@+id/action_personalAccountFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="profileItem"
+            app:argType="com.example.localprofiles.data.ProfileItemDbModel"
+            app:nullable="true" />
+    </fragment>
 </navigation>

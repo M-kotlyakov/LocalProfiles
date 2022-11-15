@@ -29,4 +29,8 @@ class ProfileListMapper {
     fun mapListDbModelToListEntity(list: List<ProfileItemDbModel>) = list.map {
         mapDbModelToEntity(it)
     }
+
+    fun mapListEntityToListDbModel(list: List<ProfileItem>) = list.map {
+        mapEntityToDbModel(it)
+    }
 }

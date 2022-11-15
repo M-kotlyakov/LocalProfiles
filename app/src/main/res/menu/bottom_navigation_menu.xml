@@ -9,14 +9,14 @@
         android:enabled="true"
         android:icon="@drawable/home_icon"
         android:title="@string/main_page"/>
-    <!--<item
+    <item
         android:id="@+id/addProfileFragment"
         android:enabled="true"
         android:icon="@drawable/add_personal_account"
-        android:title="@string/add_personal_account"/>-->
-    <item
+        android:title="@string/add_personal_account"/>
+    <!--<item
         android:id="@+id/personalAccountFragment"
         android:enabled="true"
         android:icon="@drawable/personal_account"
-        android:title="@string/personal_page"/>
+        android:title="@string/personal_page"/>-->
 </menu>

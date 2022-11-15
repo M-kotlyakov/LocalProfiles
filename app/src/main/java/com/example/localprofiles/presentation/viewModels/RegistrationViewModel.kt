@@ -1,37 +1,37 @@
 package com.example.localprofiles.presentation.viewModels
 
 import android.app.Application
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.localprofiles.data.ProfileListRepositoryImpl
 import com.example.localprofiles.domain.AddProfileItemUseCase
 import com.example.localprofiles.domain.ProfileItem
+import com.example.localprofiles.presentation.factory.ViewModelFactory
 import kotlinx.coroutines.launch
 
-class AddProfileViewModel(private val application: Application) : ViewModel() {
+class RegistrationViewModel(
+    private val application: Application
+): ViewModel() {
 
     private val repository = ProfileListRepositoryImpl(application)
     private val addProfileItemUseCase = AddProfileItemUseCase(repository)
 
-    fun addItemToDb(
+    fun registrationProfile(
         name: String,
-        surname: String,
         email : String,
-        dateOfBirth: String,
-        description: String
+        password: String,
+        rePassword: String
     ) {
         viewModelScope.launch {
             val item = ProfileItem(
                 name = name,
-                surname = surname,
+                surname = "",
                 email = email,
-                dateOfBirth = dateOfBirth,
-                description = description,
-                numberPhone = "8925552525",
-                password = "111"
+                dateOfBirth = "",
+                description = "",
+                numberPhone = "",
+                password = password
             )
             addProfileItemUseCase(item)
         }

@@ -8,11 +8,11 @@ import java.io.Serializable
 data class ProfileItemDbModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val name: String,
+    val name: String? = null,
     val surname: String,
     val email: String,
     val dateOfBirth: String,
     val numberPhone: String,
     val description: String,
     val password: String
-)
+): Serializable
