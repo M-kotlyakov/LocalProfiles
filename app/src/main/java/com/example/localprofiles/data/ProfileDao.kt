@@ -22,5 +22,5 @@ interface ProfileDao {
     suspend fun getProfileItem(profileItemId: Int): ProfileItemDbModel
 
     @Query("SELECT * FROM profile_item WHERE name =:username and password =:password")
-    suspend fun getProfileByUsername(username :String, password: String): ProfileItemDbModel
+    suspend fun getProfileByUsername(username: String?, password: String?): ProfileItemDbModel
 }

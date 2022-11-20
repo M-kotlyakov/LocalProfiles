@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
 @Database(entities = [ProfileItemDbModel::class], version = 1, exportSchema = false)
+@TypeConverters(Converter::class)
 abstract class AppDataBase: RoomDatabase() {
 
     abstract fun profileDao(): ProfileDao

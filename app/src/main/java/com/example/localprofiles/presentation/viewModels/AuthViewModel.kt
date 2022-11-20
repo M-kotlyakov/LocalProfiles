@@ -12,12 +12,13 @@ import com.example.localprofiles.data.ProfileListRepositoryImpl
 import com.example.localprofiles.domain.GetProfileByUsername
 import com.example.localprofiles.domain.ProfileItem
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 
 class AuthViewModel(
     private val application: Application
 ): ViewModel() {
 
-    var isOkay = false
+    private var isSuccess = false
 
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean>
@@ -37,13 +38,16 @@ class AuthViewModel(
         if (fieldsValid) {
             viewModelScope.launch {
                 item.postValue(getProfileByUsername(username, password))
+                finishWork()
             }
         }
         return item
     }
 
-    private fun validateInput(name: String, password: String) : Boolean {
+    private fun validateInput(inputName: String, inputPassword: String) : Boolean {
         var result = true
+        val name = parseName(inputName)
+        val password = parseName(inputPassword)
         if (name.isBlank()) {
             _errorInputName.value = true
             result = false
@@ -55,11 +59,19 @@ class AuthViewModel(
         return result
     }
 
+    private fun parseName(inputName: String?) : String {
+        return inputName?.trim() ?: ""
+    }
+
     fun resetErrorInputName() {
         _errorInputName.postValue(false)
     }
 
     fun resetErrorInputPassword() {
         _errorInputPassword.postValue(false)
+    }
+
+    private fun finishWork() {
+        isSuccess = true
     }
 }

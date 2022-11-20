@@ -6,6 +6,7 @@ class ProfileListMapper {
 
     fun mapEntityToDbModel(profileItem: ProfileItem) = ProfileItemDbModel(
         id = profileItem.id,
+        image = profileItem.image,
         name = profileItem.name,
         surname = profileItem.surname,
         email = profileItem.email,
@@ -17,6 +18,7 @@ class ProfileListMapper {
 
     fun mapDbModelToEntity(profileItemDbModel: ProfileItemDbModel) = ProfileItem(
         id = profileItemDbModel.id,
+        image = profileItemDbModel.image,
         name = profileItemDbModel.name,
         surname = profileItemDbModel.surname,
         email = profileItemDbModel.email,
