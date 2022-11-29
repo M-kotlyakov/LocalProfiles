@@ -14,11 +14,11 @@ import com.example.localprofiles.domain.ProfileItem
 import com.google.android.material.imageview.ShapeableImageView
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
+import javax.inject.Inject
 
-class AddProfileViewModel(private val application: Application) : ViewModel() {
-
-    private val repository = ProfileListRepositoryImpl(application)
-    private val addProfileItemUseCase = AddProfileItemUseCase(repository)
+class AddProfileViewModel @Inject constructor(
+    private val addProfileItemUseCase: AddProfileItemUseCase
+) : ViewModel() {
 
     private val emailFormatted: Pattern
         get() = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -37,7 +37,7 @@ class AddProfileViewModel(private val application: Application) : ViewModel() {
         isChoose = true
     }
 
-    fun resetClickStatusFalse() {
+    private fun resetClickStatusFalse() {
         isChoose = false
     }
 

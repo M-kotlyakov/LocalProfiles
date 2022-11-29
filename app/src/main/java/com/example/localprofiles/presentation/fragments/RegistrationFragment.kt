@@ -1,5 +1,6 @@
 package com.example.localprofiles.presentation.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -16,17 +17,17 @@ import androidx.navigation.fragment.findNavController
 import com.example.localprofiles.R
 import com.example.localprofiles.databinding.FragmentRegistrationBinding
 import com.example.localprofiles.presentation.Common.log
+import com.example.localprofiles.presentation.ProfilesApp
 import com.example.localprofiles.presentation.activities.MainActivity
 import com.example.localprofiles.presentation.factory.ViewModelFactory
 import com.example.localprofiles.presentation.viewModels.RegistrationViewModel
 import com.google.android.material.textfield.TextInputEditText
-
+import javax.inject.Inject
 
 class RegistrationFragment : Fragment() {
 
-    private val viewModelFactory by lazy {
-        ViewModelFactory(requireActivity().application)
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private val vm by lazy {
         ViewModelProvider(this, viewModelFactory)[RegistrationViewModel::class.java]
@@ -35,6 +36,15 @@ class RegistrationFragment : Fragment() {
     private var _binding: FragmentRegistrationBinding? = null
     private val binding: FragmentRegistrationBinding
         get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
+
+    private val component by lazy {
+        (requireActivity().application as ProfilesApp).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

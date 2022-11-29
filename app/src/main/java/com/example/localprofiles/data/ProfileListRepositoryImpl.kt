@@ -5,13 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.localprofiles.domain.ProfileItem
 import com.example.localprofiles.domain.ProfileListRepository
+import javax.inject.Inject
 
-class ProfileListRepositoryImpl(
-    application: Application
+class ProfileListRepositoryImpl @Inject constructor(
+    private val profileDao: ProfileDao,
+    private val mapper: ProfileListMapper
 ): ProfileListRepository {
-
-    private val profileDao = AppDataBase.getInstance(application).profileDao()
-    private val mapper = ProfileListMapper()
 
     override suspend fun addProfileItem(profileItem: ProfileItem) {
         profileDao.addProfileItem(mapper.mapEntityToDbModel(profileItem))

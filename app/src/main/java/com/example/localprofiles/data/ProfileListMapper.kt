@@ -1,8 +1,9 @@
 package com.example.localprofiles.data
 
 import com.example.localprofiles.domain.ProfileItem
+import javax.inject.Inject
 
-class ProfileListMapper {
+class ProfileListMapper @Inject constructor() {
 
     fun mapEntityToDbModel(profileItem: ProfileItem) = ProfileItemDbModel(
         id = profileItem.id,

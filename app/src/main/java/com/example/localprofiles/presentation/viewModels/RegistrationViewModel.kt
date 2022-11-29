@@ -13,13 +13,11 @@ import com.example.localprofiles.domain.ProfileItem
 import com.example.localprofiles.presentation.factory.ViewModelFactory
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
+import javax.inject.Inject
 
-class RegistrationViewModel(
-    private val application: Application
+class RegistrationViewModel @Inject constructor(
+    private val addProfileItemUseCase: AddProfileItemUseCase
 ): ViewModel() {
-
-    private val repository = ProfileListRepositoryImpl(application)
-    private val addProfileItemUseCase = AddProfileItemUseCase(repository)
 
     private val emailFormatted: Pattern
         get() = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +

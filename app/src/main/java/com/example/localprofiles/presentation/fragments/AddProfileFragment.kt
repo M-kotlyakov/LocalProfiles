@@ -1,6 +1,7 @@
 package com.example.localprofiles.presentation.fragments
 
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.localprofiles.R
 import com.example.localprofiles.databinding.FragmentAddProfileBinding
+import com.example.localprofiles.presentation.ProfilesApp
 import com.example.localprofiles.presentation.factory.ViewModelFactory
 import com.example.localprofiles.presentation.viewModels.AddProfileViewModel
 import com.squareup.picasso.Picasso
@@ -23,22 +25,30 @@ import ru.tinkoff.decoro.slots.PredefinedSlots
 import ru.tinkoff.decoro.watchers.FormatWatcher
 import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 import java.io.IOException
+import javax.inject.Inject
 
 
 class AddProfileFragment : Fragment() {
 
-    private val viewModelFactory by lazy {
-        ViewModelFactory(requireActivity().application)
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private val vm by lazy {
         ViewModelProvider(this, viewModelFactory)[AddProfileViewModel::class.java]
+    }
+
+    private val component by lazy {
+        (requireActivity().application as ProfilesApp).component
     }
 
     private var _binding: FragmentAddProfileBinding? = null
     private val binding: FragmentAddProfileBinding
         get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
 
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

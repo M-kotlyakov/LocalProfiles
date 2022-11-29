@@ -7,8 +7,15 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.localprofiles.R
 import com.example.localprofiles.databinding.ActivityLoginBinding
+import com.example.localprofiles.presentation.ProfilesApp
+import com.example.localprofiles.presentation.factory.ViewModelFactory
+import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
+
+    private val component by lazy {
+        (application as ProfilesApp).component
+    }
 
     private var _binding: ActivityLoginBinding? = null
     private val binding: ActivityLoginBinding
@@ -17,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
     private var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)

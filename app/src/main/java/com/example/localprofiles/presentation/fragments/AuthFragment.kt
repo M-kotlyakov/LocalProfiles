@@ -17,31 +17,44 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.localprofiles.R
 import com.example.localprofiles.databinding.FragmentAuthBinding
+import com.example.localprofiles.presentation.Common.log
+import com.example.localprofiles.presentation.ProfilesApp
 import com.example.localprofiles.presentation.activities.MainActivity
 import com.example.localprofiles.presentation.factory.ViewModelFactory
 import com.example.localprofiles.presentation.viewModels.AuthViewModel
 import com.example.localprofiles.presentation.viewModels.HomeViewModel
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
 class AuthFragment : Fragment() {
 
-    private val viewModelFactory by lazy {
-        ViewModelFactory(requireActivity().application)
-    }
-
-    private val vm by lazy {
-        ViewModelProvider(this, viewModelFactory)[AuthViewModel::class.java]
-    }
+    private lateinit var vm: AuthViewModel
+//    private val vm by lazy {
+//        ViewModelProvider(this, viewModelFactory)[AuthViewModel::class.java]
+//    }
 
     private var _binding: FragmentAuthBinding? = null
     private val binding: FragmentAuthBinding
         get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as ProfilesApp).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAuthBinding.inflate(inflater, container, false)
         return binding.root
@@ -49,6 +62,8 @@ class AuthFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        log("AuthFragment", "${requireActivity().toString()}")
+        vm = ViewModelProvider(this, viewModelFactory )[AuthViewModel::class.java]
         binding.vm = vm
         binding.lifecycleOwner = viewLifecycleOwner
         launchRightFragment(view.context)

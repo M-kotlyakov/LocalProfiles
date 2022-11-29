@@ -42,6 +42,9 @@ dependencies {
 
     implementation 'ru.tinkoff.decoro:decoro:1.1.1'
 
+    implementation 'com.google.dagger:dagger:2.35.1'
+    kapt 'com.google.dagger:dagger-compiler:2.35.1'
+
     //MaskEditText
     implementation 'io.github.vicmikhailau:MaskedEditText:4.0.7'
 

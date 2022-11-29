@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.localprofiles.R
 import com.example.localprofiles.databinding.ActivityMainBinding
+import com.example.localprofiles.presentation.ProfilesApp
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +17,12 @@ class MainActivity : AppCompatActivity() {
 
     private var navController: NavController? = null
 
+    private val component by lazy {
+        (application as ProfilesApp).component
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

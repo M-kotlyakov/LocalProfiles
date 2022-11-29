@@ -12,14 +12,12 @@ import com.example.localprofiles.domain.EditProfileItemUseCase
 import com.example.localprofiles.domain.ProfileItem
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
+import javax.inject.Inject
 
-class PersonalAccountViewModel(
-    private val application: Application
+class PersonalAccountViewModel @Inject constructor(
+    private val mapper: ProfileListMapper,
+    private val editProfileItemUseCase: EditProfileItemUseCase
 ) : ViewModel() {
-
-    private val mapper = ProfileListMapper()
-    private val repository = ProfileListRepositoryImpl(application)
-    private val editProfileItemUseCase = EditProfileItemUseCase(repository)
 
     private val emailFormatted: Pattern
         get() = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -38,7 +36,7 @@ class PersonalAccountViewModel(
         isChoose = true
     }
 
-    fun resetClickStatusFalse() {
+    private fun resetClickStatusFalse() {
         isChoose = false
     }
 

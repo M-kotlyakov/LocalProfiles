@@ -1,6 +1,7 @@
 package com.example.localprofiles.presentation.fragments
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.localprofiles.R
 import com.example.localprofiles.data.ProfileListMapper
 import com.example.localprofiles.databinding.FragmentHomeBinding
+import com.example.localprofiles.presentation.ProfilesApp
 import com.example.localprofiles.presentation.activities.HomeAdapter
 import com.example.localprofiles.presentation.factory.ViewModelFactory
 import com.example.localprofiles.presentation.viewModels.HomeViewModel
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
 
@@ -25,9 +28,8 @@ class HomeFragment : Fragment() {
 
     private val mapper = ProfileListMapper()
 
-    private val viewModelFactory by lazy {
-        ViewModelFactory(requireActivity().application)
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private val vm by lazy {
         ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
@@ -36,6 +38,15 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
         get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
+
+    private val component by lazy {
+        (requireActivity().application as ProfilesApp).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -13,9 +13,10 @@ import com.example.localprofiles.domain.GetProfileByUsername
 import com.example.localprofiles.domain.ProfileItem
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
+import javax.inject.Inject
 
-class AuthViewModel(
-    private val application: Application
+class AuthViewModel @Inject constructor(
+    private val getProfileByUsername: GetProfileByUsername
 ): ViewModel() {
 
     private var isSuccess = false
@@ -27,9 +28,6 @@ class AuthViewModel(
     private val _errorInputPassword = MutableLiveData<Boolean>()
     val errorInputPassword: LiveData<Boolean>
         get() = _errorInputPassword
-
-    private val repository = ProfileListRepositoryImpl(application)
-    private val getProfileByUsername = GetProfileByUsername(repository)
 
     @SuppressLint("NullSafeMutableLiveData")
     fun getProfile(username: String, password: String) : LiveData<ProfileItemDbModel> {
